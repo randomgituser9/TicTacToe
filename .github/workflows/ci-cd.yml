@@ -50,12 +50,3 @@ jobs:
           name: tictactoe-app
           path: target/*.jar
           retention-days: 30
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: release-${{ github.run_number }}
-          name: Release ${{ github.run_number }}
-          files: target/*.jar
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
