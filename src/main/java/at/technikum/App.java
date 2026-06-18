@@ -3,26 +3,42 @@ package at.technikum;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) {Scanner scanner = new Scanner(System.in);
         TicTacToe game = new TicTacToe();
-        game.start();
 
-        while (!game.isGameEnded()) {
-            System.out.println("CurrentPlayer: " + game.getCurrentPlayer().getMarker());
-            game.getBoard().print();
+        boolean playAgain = true;
 
-            int row = readInt(scanner, "Reihe (0-2): ");
-            int col = readInt(scanner, "Spalte (0-2): ");
+        while (playAgain) {
+            game.start();
 
-            try {
-                game.makeMove(row, col);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Ungültiger Zug " + e.getMessage());
-                continue;
+            while (!game.isGameEnded()) {
+                System.out.println("CurrentPlayer: " + game.getCurrentPlayer().getMarker());
+                game.getBoard().print();
+
+                int row = readInt(scanner, "Reihe (0-2): ");
+                int col = readInt(scanner, "Spalte (0-2): ");
+
+                try {
+                    game.makeMove(row, col);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Ungültiger Zug " + e.getMessage());
+                    continue;
+                }
+
+                game.switchCurrentPlayer();
             }
 
-            game.switchCurrentPlayer();
+            game.getBoard().print();
+
+            if (game.hasWinner()) {
+                System.out.println("Player " + game.getCurrentPlayer().getMarker() + " gewinnt!");
+            } else {
+                System.out.println("Unentschieden!");
+            }
+
+            System.out.print("Nochmal spielen? (y/n): ");
+            String answer = scanner.next();
+            playAgain = answer.equalsIgnoreCase("y");
         }
 
         scanner.close();
