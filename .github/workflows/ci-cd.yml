@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up JDK 24
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '24'
           distribution: 'temurin'
@@ -32,10 +32,10 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up JDK 24
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '24'
           distribution: 'temurin'
@@ -45,14 +45,14 @@ jobs:
         run: mvn clean package -DskipTests
 
       - name: Upload JAR Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: tictactoe-app
           path: target/*.jar
           retention-days: 30
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: release-${{ github.run_number }}
           name: Release ${{ github.run_number }}
