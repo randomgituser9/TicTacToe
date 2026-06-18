@@ -25,6 +25,16 @@ public class App {
             game.switchCurrentPlayer();
         }
 
+
+        game.getBoard().print();
+
+        if (game.hasWinner()) {
+            System.out.println("Player " + game.getCurrentPlayer().getMarker() + " gewinnt!");
+        } else {
+            System.out.println("Unentschieden!");
+        }
+
+
         scanner.close();
     }
 
