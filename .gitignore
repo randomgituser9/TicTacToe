@@ -37,3 +37,10 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Node ###
+node_modules/
+package.json
+package-lock.json
+create-doku.js
+*.docx
